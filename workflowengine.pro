@@ -1,4 +1,6 @@
 :- use_module(library(lists)).
+:- use_module(library(ugraphs)).
+
 :- dynamic workflow/3.
 setup :- assert(workflow(1,
 		[select(1,'backend://location/dir/file1.txt'),
