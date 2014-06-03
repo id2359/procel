@@ -1,7 +1,13 @@
 :- use_module(library(lists)).
 :- use_module(library(ugraphs)).
+:- use_module('loader.pro').
 
 :- dynamic workflow/3.
+
+test_load(JsonFile,Obj) :-
+    load_workflow(JsonFile,Obj).
+
+
 setup :- assert(workflow(1,
 		[select(1,'backend://location/dir/file1.txt'),
 	         select(2,'file2.pl')],
