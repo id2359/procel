@@ -11,7 +11,7 @@ test_load(JsonFile,Obj) :-
 setup :- assert(workflow(1,
 		[select(1,'backend://location/dir/file1.txt'),
 	         select(2,'file2.pl')],
-	 
+
 	        [job(1,'foobar', [ option('-i',input(select(2))),
 			           option('-h',value(23)),
 			           option('-o',output('output.txt'))]),
@@ -29,7 +29,7 @@ inputnums([Option|Rest],[N | OtherNums ]) :-
 	inputjobnumfromoption(Option,N),
 	inputnums(Rest,OtherNums).
 
-	
+
 inputs(job(_,_,Options),InputJobNums) :-
 	list:include(inputfileoption,Options,InputFileOptions),
 	inputnums(InputFileOptions,InputJobNums).
@@ -52,6 +52,14 @@ depends(WID,JIDA,JIDB) :-
 	jobinputs(WID,JIDA,Nums),
 	member(JIDB,Nums).
 
-inconsistent(WID) :-
-	depends(WID,X,Y),
-	depends(WID,Y,X).
+construct_dependency_graph(W,Vertices,Edges) :- false. % TO DO
+
+get_chains(SortedGraph, ListOfChains) ;- false. % TO DO
+construct_dependency_graph(W,Vertices,Edges),
+       ugraphs:vertices_edges_to_ugraph(Vertices, Edges,Graph),
+       ugraphs:top_sort(Graph,SortedGraph),
+       get_chains(SortedGraph, ListOfChains).
+
+
+
+
