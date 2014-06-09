@@ -52,12 +52,12 @@ depends(WID,JIDA,JIDB) :-
 	jobinputs(WID,JIDA,Nums),
 	member(JIDB,Nums).
 
-construct_dependency_graph(W,Vertices,Edges) :- false. % TO DO
+construct_dependency_graph(W, Edges) :- false. % TO DO
 
 get_chains(SortedGraph, ListOfChains) :- false. % TO DO
 
 analyse_workflow(Workflow,ListOfChains) :-
-       construct_dependency_graph(Workflow,Vertices,Edges),
-       ugraphs:vertices_edges_to_ugraph(Vertices, Edges,Graph),
+       construct_dependency_graph(Workflow,Edges),
+       ugraphs:vertices_edges_to_ugraph([],Edges,Graph),
        ugraphs:top_sort(Graph,SortedGraph),
        get_chains(SortedGraph, ListOfChains).
