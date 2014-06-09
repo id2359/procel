@@ -54,12 +54,10 @@ depends(WID,JIDA,JIDB) :-
 
 construct_dependency_graph(W,Vertices,Edges) :- false. % TO DO
 
-get_chains(SortedGraph, ListOfChains) ;- false. % TO DO
-construct_dependency_graph(W,Vertices,Edges),
+get_chains(SortedGraph, ListOfChains) :- false. % TO DO
+
+analyse_workflow(Workflow,ListOfChains) :-
+       construct_dependency_graph(Workflow,Vertices,Edges),
        ugraphs:vertices_edges_to_ugraph(Vertices, Edges,Graph),
        ugraphs:top_sort(Graph,SortedGraph),
        get_chains(SortedGraph, ListOfChains).
-
-
-
-
